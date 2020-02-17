@@ -9,8 +9,8 @@ struct professor typedef TProfessores;
 struct disciplina typedef TDisciplinas;
 
 int RA = 20200000;
-int COD_PROF = 20200000;
-int COD_DISC = 20200000;
+int COD_PROF = 20201000;
+int COD_DISC = 20202000;
 
 struct aluno {
     char nome[50];
@@ -42,6 +42,7 @@ void lst_imprime_alunos(TAlunos* l);
 void lst_imprime_professores(TProfessores* l);
 void lst_imprime_disciplinas(TDisciplinas* l);
 
+
 int main() {
     char nome[50];
     TAlunos* alunos = lst_cria_alunos();
@@ -52,7 +53,17 @@ int main() {
     alunos = lst_insere_alunos(alunos, nome);
     strcpy(nome, "Agostinho");
     alunos = lst_insere_alunos(alunos, nome);
+    strcpy(nome, "Shima");
+    professores = lst_insere_professores(professores, nome);
+    strcpy(nome, "Miro");
+    professores = lst_insere_professores(professores, nome);
+    strcpy(nome, "Calculo A");
+    disciplinas = lst_insere_disciplinas(disciplinas, nome);
+    strcpy(nome, "Paradigmas A");
+    disciplinas = lst_insere_disciplinas(disciplinas, nome);
     lst_imprime_alunos(alunos);
+    lst_imprime_professores(professores);
+    lst_imprime_disciplinas(disciplinas);
 
     return 0;
 }
