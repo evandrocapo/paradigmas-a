@@ -41,6 +41,9 @@ TDisciplinas* lst_cria_disciplinas(void);
 void lst_imprime_alunos(TAlunos* l);
 void lst_imprime_professores(TProfessores* l);
 void lst_imprime_disciplinas(TDisciplinas* l);
+void lst_remover_alunos(TAlunos* l, int info);
+void lst_remover_professores(TProfessores* l, int info);
+void lst_remover_disciplinas(TDisciplinas* l, int info);
 
 
 int main() {
@@ -61,6 +64,7 @@ int main() {
     disciplinas = lst_insere_disciplinas(disciplinas, nome);
     strcpy(nome, "Paradigmas A");
     disciplinas = lst_insere_disciplinas(disciplinas, nome);
+    lst_remover_alunos(alunos, 20200000);
     lst_imprime_alunos(alunos);
     lst_imprime_professores(professores);
     lst_imprime_disciplinas(disciplinas);
@@ -139,4 +143,68 @@ TDisciplinas* lst_insere_disciplinas(TDisciplinas* l, char nome[50]) {
     COD_PROF = COD_PROF + 1;
 
     return novo;
+}
+
+/* remoção: remove no da lista com a info informada */
+void lst_remover_alunos(TAlunos* l, int info){
+    TAlunos *a;
+    TAlunos *p = l;
+
+    while(p != NULL && p->ra != info){
+        a = p;
+        p = p->prox;
+    }
+    if(p != NULL){
+        if(p->ra == info){
+            if(a == NULL){
+                l = p->prox;
+            }
+            else{
+                a->prox = p->prox;
+            }
+            free(p);
+        }
+    }
+}
+
+void lst_remover_professores(TProfessores* l, int info){
+    TProfessores *a;
+    TProfessores *p = l;
+
+    while(p != NULL && p->cod != info){
+        a = p;
+        p = p->prox;
+    }
+    if(p != NULL){
+        if(p->cod == info){
+            if(a == NULL){
+                l = p->prox;
+            }
+            else{
+                a->prox = p->prox;
+            }
+            free(p);
+        }
+    }
+}
+
+void lst_remover_disciplinas(TDisciplinas* l, int info){
+    TDisciplinas *a;
+    TDisciplinas *p = l;
+
+    while(p != NULL && p->cod != info){
+        a = p;
+        p = p->prox;
+    }
+    if(p != NULL){
+        if(p->cod == info){
+            if(a == NULL){
+                l = p->prox;
+            }
+            else{
+                a->prox = p->prox;
+            }
+            free(p);
+        }
+    }
 }
