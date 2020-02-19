@@ -27,8 +27,8 @@ struct professor {
 struct disciplina {
     char nome[50];
     int cod;
-    TAlunos alunos;
-    TProfessores professor;
+    TAlunos *alunos;
+    TProfessores *professor;
     struct disciplina* prox;
 } typedef TDisciplinas;
 
@@ -44,7 +44,7 @@ void lst_imprime_disciplinas(TDisciplinas* l);
 void lst_remover_alunos(TAlunos* l, int info);
 void lst_remover_professores(TProfessores* l, int info);
 void lst_remover_disciplinas(TDisciplinas* l, int info);
-
+void lst_imprime_alunos_na_disciplina(TDisciplinas* l, int cod_dis);
 
 int main() {
     char nome[50];
@@ -68,6 +68,7 @@ int main() {
     lst_imprime_alunos(alunos);
     lst_imprime_professores(professores);
     lst_imprime_disciplinas(disciplinas);
+    lst_imprime_alunos_na_disciplina(disciplinas, 20202000);
 
     return 0;
 }
@@ -75,6 +76,10 @@ int main() {
 /* funcao imprime */
 void lst_imprime_alunos(TAlunos* l) {
     TAlunos* p;
+    if(l == NULL){
+        printf("Nenhum aluno cadastrado na materia.");
+        return;
+    }
     for (p = l; p != NULL; p = p->prox) {
         printf("nome = %s\n", p->nome);
         printf("ra = %d\n", p->ra);
@@ -94,6 +99,23 @@ void lst_imprime_disciplinas(TDisciplinas* l) {
     for (p = l; p != NULL; p = p->prox) {
         printf("nome = %s\n", p->nome);
         printf("cod = %d\n", p->cod);
+    }
+}
+
+void lst_imprime_alunos_na_disciplina(TDisciplinas* l, int cod_dis) {
+    TDisciplinas* p;
+    TAlunos* f;
+    for (p = l; p != NULL && p->cod != cod_dis; p = p->prox) {
+    }
+    if(p != NULL){
+        if(p->cod == cod_dis){
+            f = p->alunos;
+            printf("Disciplina: %s\n", p->nome);
+            lst_imprime_alunos(f);
+        }
+    }
+    else{
+        printf("Disciplina não encontrada");
     }
 }
 
@@ -127,20 +149,26 @@ TProfessores* lst_insere_professores(TProfessores* l, char nome[50]) {
     TProfessores* novo = (TProfessores*)malloc(sizeof(TProfessores));
 
     strcpy(novo->nome, nome);
-    novo->cod = COD_DISC;
+    novo->cod = COD_PROF;
     novo->prox = l;
-    COD_DISC = COD_DISC + 1;
+    COD_PROF = COD_PROF + 1;
 
     return novo;
 }
 
 TDisciplinas* lst_insere_disciplinas(TDisciplinas* l, char nome[50]) {
     TDisciplinas* novo = (TDisciplinas*)malloc(sizeof(TDisciplinas));
+    TAlunos* alunos;
+    TProfessores* professor;
 
     strcpy(novo->nome, nome);
-    novo->cod = COD_PROF;
+    novo->cod = COD_DISC;
     novo->prox = l;
-    COD_PROF = COD_PROF + 1;
+    // *alunos = novo->alunos;
+    // alunos = lst_cria_alunos();
+    // *professor = novo->professor;
+    // professor = lst_cria_professores();
+    COD_DISC = COD_DISC + 1;
 
     return novo;
 }
