@@ -45,6 +45,8 @@ void lst_remover_alunos(TAlunos* l, int info);
 void lst_remover_professores(TProfessores* l, int info);
 void lst_remover_disciplinas(TDisciplinas* l, int info);
 void lst_imprime_alunos_na_disciplina(TDisciplinas* l, int cod_dis);
+void lst_remover_alunos_disciplinas(TDisciplinas* l, int cod[50], int quantidade);
+void lst_remover_alunos_disciplinas(TDisciplinas* l, int ra[50], int quantidade);
 
 int main() {
     char nome[50];
@@ -235,4 +237,28 @@ void lst_remover_disciplinas(TDisciplinas* l, int info){
             free(p);
         }
     }
+}
+
+/* remoção na disciplina: remove no da lista dentro da disciplona com as infos informada */
+
+void lst_remover_alunos_disciplinas(TDisciplinas* l, int ra[50], int quantidade){
+    TAlunos *p = l->alunos;
+    int i;
+
+    for(i = 0; i < quantidade; i++){
+        lst_remover_alunos(p, ra[i]);
+    }
+
+    printf("Alunos removidos com sucesso !");
+}
+
+void lst_remover_alunos_disciplinas(TDisciplinas* l, int cod[50], int quantidade){
+    TProfessores *p = l->professor;
+    int i;
+
+    for(i = 0; i < quantidade; i++){
+        lst_remover_professores(p, cod[i]);
+    }
+
+    printf("Professores removidos com sucesso !");
 }
