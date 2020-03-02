@@ -62,10 +62,11 @@ TDisciplinas* lst_procura_disciplinas(TDisciplinas *l, int cod); // procura disc
 void lst_insere_alunos_na_disciplina(TAlunos *l, int ra[50], int quant_aluno, TDisciplinas *f, int cod_disc[50], int quant_disc); // insere alunos pelo ra nas disciplinas.
 void lst_insere_professores_na_disciplina(TProfessores *l, int cod[50], int quant_professor, TDisciplinas *f, int cod_disc[50], int quant_disc); // insere professores pelo cod na disciplinas.
 
-void lst_imprime_alunos_na_disciplina(TDisciplinas *l, int cod_dis);
-void lst_imprime_professores_na_disciplina(TDisciplinas *l, int cod_dis);
-void lst_remover_alunos_disciplinas(TDisciplinas *l, int ra[50], int quantidade);
-void lst_remover_professores_disciplinas(TDisciplinas *l, int cod[50], int quantidade);
+void lst_imprime_alunos_na_disciplina(TDisciplinas *l, int cod_dis); // imprime alunos de uma disciplina
+void lst_imprime_professores_na_disciplina(TDisciplinas *l, int cod_dis); // imprime professores de uma disciplina
+
+void lst_remover_alunos_disciplinas(TDisciplinas *l, int ra[50], int quantidade); // remove alunos de uma disciplina
+void lst_remover_professores_disciplinas(TDisciplinas *l, int cod[50], int quantidade); // remove professores de uma disciplina
 
 int main()
 {
@@ -73,6 +74,7 @@ int main()
     int ra_a[50];
     int cod_a[50];
     ra_a[0] = 20200001;
+    ra_a[1] = 20200002;
     cod_a[0] = 20202000;
     TAlunos *alunos = lst_cria_alunos();
     TProfessores *professores = lst_cria_professores();
@@ -95,13 +97,13 @@ int main()
     strcpy(nome, "Paradigmas A");
     disciplinas = lst_insere_disciplinas(disciplinas, nome);
 
-    lst_insere_alunos_na_disciplina(alunos,ra_a, 1, disciplinas, cod_a, 1);
+    lst_insere_alunos_na_disciplina(alunos,ra_a, 2, disciplinas, cod_a, 1);
 
     lst_remover_alunos(alunos, 20200000);
     lst_imprime_alunos(alunos);
     lst_imprime_professores(professores);
     lst_imprime_disciplinas(disciplinas);
-    lst_imprime_alunos_na_disciplina(disciplinas, 20202000);
+    lst_imprime_alunos_na_disciplina(disciplinas, cod_a[0]);
 
     return 0;
 }
