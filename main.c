@@ -35,32 +35,32 @@ struct disciplina
     struct disciplina *prox;
 } typedef TDisciplinas;
 
-TAlunos *lst_cria_alunos(void);
-TProfessores *lst_cria_professores(void);
-TDisciplinas *lst_cria_disciplinas(void);
+TAlunos *lst_cria_alunos(void); // cria lista NULL
+TProfessores *lst_cria_professores(void); // cria lista NULL
+TDisciplinas *lst_cria_disciplinas(void); // cria lista NULL
 
-TAlunos *lst_insere_alunos(TAlunos *l, char nome[50]);
-TProfessores *lst_insere_professores(TProfessores *l, char nome[50]);
-TDisciplinas *lst_insere_disciplinas(TDisciplinas *l, char nome[50]);
+TAlunos *lst_insere_alunos(TAlunos *l, char nome[50]); // insere aluno na lista TAlunos e retorna.
+TProfessores *lst_insere_professores(TProfessores *l, char nome[50]); // insere professor na lista TProfessores e retorna.
+TDisciplinas *lst_insere_disciplinas(TDisciplinas *l, char nome[50]); // insere disciplina na lista TDisciplinas e retorna.
 
-TAlunos *lst_insere_alunos_na_disciplina_aux(TAlunos *l, char nome[50], int ra);
-TProfessores *lst_insere_professores_na_disciplina_aux(TProfessores *l, char nome[50], int cod);
+TAlunos *lst_insere_alunos_na_disciplina_aux(TAlunos *l, char nome[50], int ra); // insere aluno na lista TAlunos e retorna na TAlunos da disciplina.
+TProfessores *lst_insere_professores_na_disciplina_aux(TProfessores *l, char nome[50], int cod); // insere professor na lista TProfessores e retorna na TProfessores da disciplina.
 
-void lst_imprime_alunos(TAlunos *l);
-void lst_imprime_professores(TProfessores *l);
-void lst_imprime_disciplinas(TDisciplinas *l);
+void lst_imprime_alunos(TAlunos *l); // imprime todos os alunos.
+void lst_imprime_professores(TProfessores *l); // imprime todos os professores.
+void lst_imprime_disciplinas(TDisciplinas *l); // imprime todas as disciplinas.
 
-void lst_remover_alunos(TAlunos *l, int info);
-void lst_remover_professores(TProfessores *l, int info);
-void lst_remover_disciplinas(TDisciplinas *l, int info);
+void lst_remover_alunos(TAlunos *l, int info); // remove um aluno com o ra informado.
+void lst_remover_professores(TProfessores *l, int info); // remove um professor do cod informado
+void lst_remover_disciplinas(TDisciplinas *l, int info); // remove uma disciplina do cod informado..
 
-TAlunos* lst_procura_alunos(TAlunos *l, int ra);
-TProfessores* lst_procura_professores(TProfessores *l, int cod);
-TDisciplinas* lst_procura_disciplinas(TDisciplinas *l, int cod);
+TAlunos* lst_procura_alunos(TAlunos *l, int ra); // procura aluno e retorna o endereço da memoria do aluno.
+TProfessores* lst_procura_professores(TProfessores *l, int cod); // procura professor e retorna o endereço da memoria do professor.
+TDisciplinas* lst_procura_disciplinas(TDisciplinas *l, int cod); // procura disciplina e retorna o endereço da memoria do disciplina.
 
 
-void lst_insere_alunos_na_disciplina(TAlunos *l, int ra[50], int quant_aluno, TDisciplinas *f, int cod_disc[50], int quant_disc);
-void lst_insere_professores_na_disciplina(TProfessores *l, int cod[50], int quant_professor, TDisciplinas *f, int cod_disc[50], int quant_disc);
+void lst_insere_alunos_na_disciplina(TAlunos *l, int ra[50], int quant_aluno, TDisciplinas *f, int cod_disc[50], int quant_disc); // insere alunos pelo ra nas disciplinas.
+void lst_insere_professores_na_disciplina(TProfessores *l, int cod[50], int quant_professor, TDisciplinas *f, int cod_disc[50], int quant_disc); // insere professores pelo cod na disciplinas.
 
 void lst_imprime_alunos_na_disciplina(TDisciplinas *l, int cod_dis);
 void lst_imprime_professores_na_disciplina(TDisciplinas *l, int cod_dis);
