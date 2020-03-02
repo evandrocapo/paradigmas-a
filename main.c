@@ -45,7 +45,6 @@ TDisciplinas *lst_insere_disciplinas(TDisciplinas *l, char nome[50]);
 
 TAlunos *lst_insere_alunos_na_disciplina_aux(TAlunos *l, char nome[50], int ra);
 TProfessores *lst_insere_professores_na_disciplina_aux(TProfessores *l, char nome[50], int cod);
-TDisciplinas *lst_insere_disciplinas_na_disciplina_aux(TDisciplinas *l, char nome[50], int cod);
 
 void lst_imprime_alunos(TAlunos *l);
 void lst_imprime_professores(TProfessores *l);
@@ -71,6 +70,10 @@ void lst_remover_professores_disciplinas(TDisciplinas *l, int cod[50], int quant
 int main()
 {
     char nome[50];
+    int ra_a[50];
+    int cod_a[50];
+    ra_a[0] = 20200001;
+    cod_a[0] = 20202000;
     TAlunos *alunos = lst_cria_alunos();
     TProfessores *professores = lst_cria_professores();
     TDisciplinas *disciplinas = lst_cria_disciplinas();
@@ -91,6 +94,9 @@ int main()
     disciplinas = lst_insere_disciplinas(disciplinas, nome);
     strcpy(nome, "Paradigmas A");
     disciplinas = lst_insere_disciplinas(disciplinas, nome);
+
+    lst_insere_alunos_na_disciplina(alunos,ra_a, 1, disciplinas, cod_a, 1);
+
     lst_remover_alunos(alunos, 20200000);
     lst_imprime_alunos(alunos);
     lst_imprime_professores(professores);
@@ -248,18 +254,6 @@ TDisciplinas *lst_insere_disciplinas(TDisciplinas *l, char nome[50]){
     return novo;
 }
 
-TDisciplinas *lst_insere_disciplinas_na_disciplina_aux(TDisciplinas *l, char nome[50], int cod){
-    TDisciplinas *novo = (TDisciplinas *)malloc(sizeof(TDisciplinas));
-    TAlunos *alunos;
-    TProfessores *professor;
-
-    strcpy(novo->nome, nome);
-    novo->cod = cod;
-    novo->prox = l;
-
-    return novo;
-}
-
 /* remoção: remove no da lista com a info informada */
 void lst_remover_alunos(TAlunos *l, int info){
     TAlunos *a;
@@ -370,7 +364,31 @@ void lst_insere_alunos_na_disciplina(TAlunos *l, int ra[50], int quant_aluno, TD
 }
 
 void lst_insere_professores_na_disciplina(TProfessores *l, int cod[50], int quant_professor, TDisciplinas *f, int cod_disc[50], int quant_disc){
-    
+    TProfessores *professor = lst_cria_professores();
+    TDisciplinas *disciplina = lst_cria_disciplinas();
+    char nome_professor[50];
+    int ra_professor;
+
+    int i, j;
+
+    for(i = 0; i < quant_professor; i++){
+        professor = lst_procura_professores(l, cod[i]);
+        if(professor != NULL){
+            for(j = 0; j < quant_disc; j++){
+                disciplina = lst_procura_disciplinas(f, cod_disc[j]);
+                if(disciplina != NULL){
+                    strcpy(nome_professor,professor->nome);
+                    ra_professor = professor->cod;
+                    disciplina->professor = lst_insere_professores_na_disciplina_aux(disciplina->professor, nome_professor, ra_professor);
+                }
+                else{
+                    printf("Disciplina com cod %d não encontrado", cod_disc[i]);
+                }
+            }
+        }else{
+            printf("Professor com RA %d não encontrado.", cod[i]);
+        }
+    }
 }
 
 /* remoção na disciplina: remove no da lista dentro da disciplona com as infos informada */
