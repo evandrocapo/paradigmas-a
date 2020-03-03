@@ -58,7 +58,6 @@ TAlunos* lst_procura_alunos(TAlunos *l, int ra); // procura aluno e retorna o en
 TProfessores* lst_procura_professores(TProfessores *l, int cod); // procura professor e retorna o endereço da memoria do professor.
 TDisciplinas* lst_procura_disciplinas(TDisciplinas *l, int cod); // procura disciplina e retorna o endereço da memoria do disciplina.
 
-
 void lst_insere_alunos_na_disciplina(TAlunos *l, int ra[50], int quant_aluno, TDisciplinas *f, int cod_disc[50], int quant_disc); // insere alunos pelo ra nas disciplinas.
 void lst_insere_professores_na_disciplina(TProfessores *l, int cod[50], int quant_professor, TDisciplinas *f, int cod_disc[50], int quant_disc); // insere professores pelo cod na disciplinas.
 
@@ -67,6 +66,22 @@ void lst_imprime_professores_na_disciplina(TDisciplinas *l, int cod_dis); // imp
 
 void lst_remover_alunos_disciplinas(TDisciplinas *l, int ra[50], int quantidade); // remove alunos de uma disciplina
 void lst_remover_professores_disciplinas(TDisciplinas *l, int cod[50], int quantidade); // remove professores de uma disciplina
+
+void menu();
+
+void cadastrarAluno();
+void cadastrarProfessor();
+void cadastrarMateria();
+
+void cancelarAluno();
+void cancelarProfessor();
+void cancelarMateria();
+
+void vincularAluno();
+void vincularProfessor();
+
+void desvincularAluno();
+void desvincularProfessor();
 
 int main()
 {
@@ -104,6 +119,8 @@ int main()
     lst_imprime_professores(professores);
     lst_imprime_disciplinas(disciplinas);
     lst_imprime_alunos_na_disciplina(disciplinas, cod_a[0]);
+
+    //menu()
 
     return 0;
 }
@@ -470,4 +487,125 @@ TDisciplinas* lst_procura_disciplinas(TDisciplinas *l, int cod){
     }
 
     return NULL;
+}
+
+
+void menu(){
+    int escolha, opcao;
+    do{
+        printf(" Escolha o que deseja fazer: \n");
+        printf("1 - Cadastro\n");
+        printf("2 - Cancelamento\n");
+        printf("3 - Vincular\n");
+        printf("4 - Desvincular");
+        printf("5 - Sair\n");
+
+        scanf("%d", &escolha);
+
+        system("cls");
+
+        switch (escolha){
+
+        case 1:
+            printf("1 - Aluno\n");
+            printf("2 - Professor\n");
+            printf("3 - Materia\n");
+            printf("4 - Voltar\n");
+
+            scanf("%d\n", &opcao);
+
+            switch (opcao){
+                case 1:
+                    cadastrarAluno();
+                break;
+
+                case 2:
+                    cadastrarProfessor();
+                break;
+
+                case 3:
+                    cadastrarMateria();
+                break;
+
+                case 4:
+                break;
+            }
+        break;
+
+        case 2:
+            printf("1 - Aluno\n");
+            printf("2 - Professor\n");
+            printf("3 - Materia\n");
+            printf("4 - Voltar\n");
+
+            scanf("%d\n", &opcao);
+
+            switch (opcao){
+
+            case 1:
+                cancelarAluno();
+            break;
+
+            case 2:
+                cancelarProfessor();
+            break;
+
+            case 3:
+                cancelarMateria();
+            break;
+
+            case 4:
+            break;
+            }
+        break;
+
+        case 3:
+            printf("1 - Aluno\n");
+            printf("2 - Professor\n");
+            printf("3 - Voltar\n");
+
+            scanf("%d\n", &opcao);
+
+            switch (opcao){
+
+            case 1:
+                vincularAluno();
+            break;
+
+            case 2:
+                vincularProfessor();
+            break;
+
+            case 3:
+            break;
+            }
+        break;
+
+        case 4:
+            printf("1 - Aluno\n");
+            printf("2 - Professor\n");
+            printf("3 - Voltar\n");
+
+            scanf("%d\n", &opcao);
+
+            switch (opcao){
+
+            case 1:
+                desvincularAluno();
+            break;
+
+            case 2:
+                desvincularProfessor();
+            break;
+
+            case 3:
+            break;
+            }
+        break;
+
+        case 5:
+            printf("Finalizando");
+            break;
+        }
+    } while (escolha != 5);
 }
