@@ -67,62 +67,182 @@ void lst_imprime_professores_na_disciplina(TDisciplinas *l, int cod_dis); // imp
 void lst_remover_alunos_disciplinas(TDisciplinas *l, int ra[50], int quantidade); // remove alunos de uma disciplina
 void lst_remover_professores_disciplinas(TDisciplinas *l, int cod[50], int quantidade); // remove professores de uma disciplina
 
-void menu();
+void menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas);
 
-void cadastrarAluno();
-void cadastrarProfessor();
-void cadastrarMateria();
+void cadastrarAluno(TAlunos *alunos);
+void cadastrarProfessor(TProfessores *professores);
+void cadastrarMateria(TDisciplinas *disciplinas);
 
-void cancelarAluno();
-void cancelarProfessor();
-void cancelarMateria();
+void cancelarAluno(TAlunos *alunos);
+void cancelarProfessor(TProfessores *professores);
+void cancelarMateria(TDisciplinas *disciplinas);
 
-void vincularAluno();
-void vincularProfessor();
+void vincularAluno(TAlunos *alunos, TDisciplinas *disciplinas);
+void vincularProfessor(TProfessores *professores, TDisciplinas *disciplinas);
 
-void desvincularAluno();
-void desvincularProfessor();
+void desvincularAluno(TAlunos *alunos, TDisciplinas *disciplinas);
+void desvincularProfessor(TProfessores *professores, TDisciplinas *disciplinas);
 
 int main()
 {
-    char nome[50];
-    int ra_a[50];
-    int cod_a[50];
-    ra_a[0] = 20200001;
-    ra_a[1] = 20200002;
-    cod_a[0] = 20202000;
+    // char nome[50];
+    // int ra_a[50];
+    // int cod_a[50];
+    // ra_a[0] = 20200001;
+    // ra_a[1] = 20200002;
+    // cod_a[0] = 20202000;
     TAlunos *alunos = lst_cria_alunos();
     TProfessores *professores = lst_cria_professores();
     TDisciplinas *disciplinas = lst_cria_disciplinas();
 
-    strcpy(nome, "Evandro");
-    alunos = lst_insere_alunos(alunos, nome);
-    strcpy(nome, "Agostinho");
-    alunos = lst_insere_alunos(alunos, nome);
-    strcpy(nome, "Felipe");
-    alunos = lst_insere_alunos(alunos, nome);
-    strcpy(nome, "Fernando");
-    alunos = lst_insere_alunos(alunos, nome);
-    strcpy(nome, "Shima");
-    professores = lst_insere_professores(professores, nome);
-    strcpy(nome, "Miro");
-    professores = lst_insere_professores(professores, nome);
-    strcpy(nome, "Calculo A");
-    disciplinas = lst_insere_disciplinas(disciplinas, nome);
-    strcpy(nome, "Paradigmas A");
-    disciplinas = lst_insere_disciplinas(disciplinas, nome);
+    menu(alunos, professores, disciplinas);
 
-    lst_insere_alunos_na_disciplina(alunos,ra_a, 2, disciplinas, cod_a, 1);
+    // strcpy(nome, "Evandro");
+    // alunos = lst_insere_alunos(alunos, nome);
+    // strcpy(nome, "Agostinho");
+    // alunos = lst_insere_alunos(alunos, nome);
+    // strcpy(nome, "Felipe");
+    // alunos = lst_insere_alunos(alunos, nome);
+    // strcpy(nome, "Fernando");
+    // alunos = lst_insere_alunos(alunos, nome);
+    // strcpy(nome, "Shima");
+    // professores = lst_insere_professores(professores, nome);
+    // strcpy(nome, "Miro");
+    // professores = lst_insere_professores(professores, nome);
+    // strcpy(nome, "Calculo A");
+    // disciplinas = lst_insere_disciplinas(disciplinas, nome);
+    // strcpy(nome, "Paradigmas A");
+    // disciplinas = lst_insere_disciplinas(disciplinas, nome);
 
-    lst_remover_alunos(alunos, 20200000);
-    lst_imprime_alunos(alunos);
-    lst_imprime_professores(professores);
-    lst_imprime_disciplinas(disciplinas);
-    lst_imprime_alunos_na_disciplina(disciplinas, cod_a[0]);
+    // lst_insere_alunos_na_disciplina(alunos,ra_a, 2, disciplinas, cod_a, 1);
 
-    //menu()
+    // lst_remover_alunos(alunos, 20200000);
+    // lst_imprime_alunos(alunos);
+    // lst_imprime_professores(professores);
+    // lst_imprime_disciplinas(disciplinas);
+    // lst_imprime_alunos_na_disciplina(disciplinas, cod_a[0]);
 
     return 0;
+}
+
+void menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas){
+    int escolha, opcao;
+    do{
+        printf(" Escolha o que deseja fazer: \n");
+        printf("1 - Cadastro\n");
+        printf("2 - Cancelamento\n");
+        printf("3 - Vincular\n");
+        printf("4 - Desvincular");
+        printf("5 - Sair\n");
+
+        scanf("%d", &escolha);
+
+        system("cls");
+
+        switch (escolha){
+
+        case 1:
+            printf("1 - Aluno\n");
+            printf("2 - Professor\n");
+            printf("3 - Materia\n");
+            printf("4 - Voltar\n");
+
+            scanf("%d\n", &opcao);
+
+            switch (opcao){
+                case 1:
+                    cadastrarAluno(alunos);
+                break;
+
+                case 2:
+                    cadastrarProfessor(professores);
+                break;
+
+                case 3:
+                    cadastrarMateria(disciplinas);
+                break;
+
+                case 4:
+                break;
+            }
+        break;
+
+        case 2:
+            printf("1 - Aluno\n");
+            printf("2 - Professor\n");
+            printf("3 - Materia\n");
+            printf("4 - Voltar\n");
+
+            scanf("%d\n", &opcao);
+
+            switch (opcao){
+
+            case 1:
+                cancelarAluno(alunos);
+            break;
+
+            case 2:
+                cancelarProfessor(professores);
+            break;
+
+            case 3:
+                cancelarMateria(disciplinas);
+            break;
+
+            case 4:
+            break;
+            }
+        break;
+
+        case 3:
+            printf("1 - Aluno\n");
+            printf("2 - Professor\n");
+            printf("3 - Voltar\n");
+
+            scanf("%d\n", &opcao);
+
+            switch (opcao){
+
+            case 1:
+                vincularAluno(alunos, disciplinas);
+            break;
+
+            case 2:
+                vincularProfessor(professores, disciplinas);
+            break;
+
+            case 3:
+            break;
+            }
+        break;
+
+        case 4:
+            printf("1 - Aluno\n");
+            printf("2 - Professor\n");
+            printf("3 - Voltar\n");
+
+            scanf("%d\n", &opcao);
+
+            switch (opcao){
+
+            case 1:
+                desvincularAluno(alunos, disciplinas);
+            break;
+
+            case 2:
+                desvincularProfessor(professores, disciplinas);
+            break;
+
+            case 3:
+            break;
+            }
+        break;
+
+        case 5:
+            printf("Finalizando");
+            break;
+        }
+    } while (escolha != 5);
 }
 
 /* funcao imprime */
@@ -489,123 +609,16 @@ TDisciplinas* lst_procura_disciplinas(TDisciplinas *l, int cod){
     return NULL;
 }
 
+void cadastrarAluno(TAlunos *alunos){}
+void cadastrarProfessor(TProfessores *professores){}
+void cadastrarMateria(TDisciplinas *disciplinas){}
 
-void menu(){
-    int escolha, opcao;
-    do{
-        printf(" Escolha o que deseja fazer: \n");
-        printf("1 - Cadastro\n");
-        printf("2 - Cancelamento\n");
-        printf("3 - Vincular\n");
-        printf("4 - Desvincular");
-        printf("5 - Sair\n");
+void cancelarAluno(TAlunos *alunos){}
+void cancelarProfessor(TProfessores *professores){}
+void cancelarMateria(TDisciplinas *disciplinas){}
 
-        scanf("%d", &escolha);
+void vincularAluno(TAlunos *alunos, TDisciplinas *disciplinas){}
+void vincularProfessor(TProfessores *professores, TDisciplinas *disciplinas){}
 
-        system("cls");
-
-        switch (escolha){
-
-        case 1:
-            printf("1 - Aluno\n");
-            printf("2 - Professor\n");
-            printf("3 - Materia\n");
-            printf("4 - Voltar\n");
-
-            scanf("%d\n", &opcao);
-
-            switch (opcao){
-                case 1:
-                    cadastrarAluno();
-                break;
-
-                case 2:
-                    cadastrarProfessor();
-                break;
-
-                case 3:
-                    cadastrarMateria();
-                break;
-
-                case 4:
-                break;
-            }
-        break;
-
-        case 2:
-            printf("1 - Aluno\n");
-            printf("2 - Professor\n");
-            printf("3 - Materia\n");
-            printf("4 - Voltar\n");
-
-            scanf("%d\n", &opcao);
-
-            switch (opcao){
-
-            case 1:
-                cancelarAluno();
-            break;
-
-            case 2:
-                cancelarProfessor();
-            break;
-
-            case 3:
-                cancelarMateria();
-            break;
-
-            case 4:
-            break;
-            }
-        break;
-
-        case 3:
-            printf("1 - Aluno\n");
-            printf("2 - Professor\n");
-            printf("3 - Voltar\n");
-
-            scanf("%d\n", &opcao);
-
-            switch (opcao){
-
-            case 1:
-                vincularAluno();
-            break;
-
-            case 2:
-                vincularProfessor();
-            break;
-
-            case 3:
-            break;
-            }
-        break;
-
-        case 4:
-            printf("1 - Aluno\n");
-            printf("2 - Professor\n");
-            printf("3 - Voltar\n");
-
-            scanf("%d\n", &opcao);
-
-            switch (opcao){
-
-            case 1:
-                desvincularAluno();
-            break;
-
-            case 2:
-                desvincularProfessor();
-            break;
-
-            case 3:
-            break;
-            }
-        break;
-
-        case 5:
-            printf("Finalizando");
-            break;
-        }
-    } while (escolha != 5);
-}
+void desvincularAluno(TAlunos *alunos, TDisciplinas *disciplinas){}
+void desvincularProfessor(TProfessores *professores, TDisciplinas *disciplinas){}
