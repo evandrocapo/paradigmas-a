@@ -333,7 +333,7 @@ void lst_imprime_alunos(TAlunos *l)
     TAlunos *p;
     if (l == NULL)
     {
-        printf("Nenhum aluno cadastrado na materia.");
+        printf("Nenhum aluno cadastrado.");
         return;
     }
     for (p = l; p != NULL; p = p->prox)
@@ -346,6 +346,11 @@ void lst_imprime_alunos(TAlunos *l)
 void lst_imprime_professores(TProfessores *l)
 {
     TProfessores *p;
+    if (l == NULL)
+    {
+        printf("Nenhum professor cadastrado.");
+        return;
+    }
     for (p = l; p != NULL; p = p->prox)
     {
         printf("nome = %s\n", p->nome);
@@ -356,6 +361,11 @@ void lst_imprime_professores(TProfessores *l)
 void lst_imprime_disciplinas(TDisciplinas *l)
 {
     TDisciplinas *p;
+    if (l == NULL)
+    {
+        printf("Nenhuma disciplina cadastrada.");
+        return;
+    }
     for (p = l; p != NULL; p = p->prox)
     {
         printf("nome = %s\n", p->nome);
