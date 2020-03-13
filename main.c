@@ -609,13 +609,41 @@ TDisciplinas* lst_procura_disciplinas(TDisciplinas *l, int cod){
     return NULL;
 }
 
-void cadastrarAluno(TAlunos *alunos){}
-void cadastrarProfessor(TProfessores *professores){}
-void cadastrarMateria(TDisciplinas *disciplinas){}
+void cadastrarAluno(TAlunos *alunos){
+    char nome[50];
+    scanf("%s",nome);
+    alunos = lst_insere_alunos(alunos, nome);
+}
+void cadastrarProfessor(TProfessores *professores){
+    char nome[50];
+    scanf("%s",nome);
+    professores = lst_insere_professores(professores, nome);
+}
+void cadastrarMateria(TDisciplinas *disciplinas){
+    char nome[50];
+    scanf("%s",nome);
+    disciplinas = lst_insere_disciplinas(disciplinas, nome);
+}
 
-void cancelarAluno(TAlunos *alunos){}
-void cancelarProfessor(TProfessores *professores){}
-void cancelarMateria(TDisciplinas *disciplinas){}
+void cancelarAluno(TAlunos *alunos){
+    int ra;
+    printf("Digite o numero de RA\n");
+    scanf("%d\n", &ra);
+    lst_remover_alunos(alunos, ra);
+}
+
+void cancelarProfessor(TProfessores *professores){
+    int cod;
+    printf("Digite o numero de COD\n");
+    scanf("%d\n", &cod);
+    lst_remover_professores(professores, cod);
+}
+void cancelarMateria(TDisciplinas *disciplinas){
+    int cod;
+    printf("Digite o numero de COD\n");
+    scanf("%d\n", &cod);
+    lst_remover_disciplinas(disciplinas, cod);
+}
 
 void vincularAluno(TAlunos *alunos, TDisciplinas *disciplinas){}
 void vincularProfessor(TProfessores *professores, TDisciplinas *disciplinas){}
