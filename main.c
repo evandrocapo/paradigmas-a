@@ -35,36 +35,36 @@ struct disciplina
     struct disciplina *prox;
 } typedef TDisciplinas;
 
-TAlunos *lst_cria_alunos(void); // cria lista NULL
+TAlunos *lst_cria_alunos(void);           // cria lista NULL
 TProfessores *lst_cria_professores(void); // cria lista NULL
 TDisciplinas *lst_cria_disciplinas(void); // cria lista NULL
 
-TAlunos *lst_insere_alunos(TAlunos *l, char nome[50]); // insere aluno na lista TAlunos e retorna.
+TAlunos *lst_insere_alunos(TAlunos *l, char nome[50]);                // insere aluno na lista TAlunos e retorna.
 TProfessores *lst_insere_professores(TProfessores *l, char nome[50]); // insere professor na lista TProfessores e retorna.
 TDisciplinas *lst_insere_disciplinas(TDisciplinas *l, char nome[50]); // insere disciplina na lista TDisciplinas e retorna.
 
-TAlunos *lst_insere_alunos_na_disciplina_aux(TAlunos *l, char nome[50], int ra); // insere aluno na lista TAlunos e retorna na TAlunos da disciplina.
+TAlunos *lst_insere_alunos_na_disciplina_aux(TAlunos *l, char nome[50], int ra);                 // insere aluno na lista TAlunos e retorna na TAlunos da disciplina.
 TProfessores *lst_insere_professores_na_disciplina_aux(TProfessores *l, char nome[50], int cod); // insere professor na lista TProfessores e retorna na TProfessores da disciplina.
 
-void lst_imprime_alunos(TAlunos *l); // imprime todos os alunos.
+void lst_imprime_alunos(TAlunos *l);           // imprime todos os alunos.
 void lst_imprime_professores(TProfessores *l); // imprime todos os professores.
 void lst_imprime_disciplinas(TDisciplinas *l); // imprime todas as disciplinas.
 
-void lst_remover_alunos(TAlunos *l, int info); // remove um aluno com o ra informado.
+void lst_remover_alunos(TAlunos *l, int info);           // remove um aluno com o ra informado.
 void lst_remover_professores(TProfessores *l, int info); // remove um professor do cod informado
 void lst_remover_disciplinas(TDisciplinas *l, int info); // remove uma disciplina do cod informado..
 
-TAlunos* lst_procura_alunos(TAlunos *l, int ra); // procura aluno e retorna o endereço da memoria do aluno.
-TProfessores* lst_procura_professores(TProfessores *l, int cod); // procura professor e retorna o endereço da memoria do professor.
-TDisciplinas* lst_procura_disciplinas(TDisciplinas *l, int cod); // procura disciplina e retorna o endereço da memoria do disciplina.
+TAlunos *lst_procura_alunos(TAlunos *l, int ra);                 // procura aluno e retorna o endereço da memoria do aluno.
+TProfessores *lst_procura_professores(TProfessores *l, int cod); // procura professor e retorna o endereço da memoria do professor.
+TDisciplinas *lst_procura_disciplinas(TDisciplinas *l, int cod); // procura disciplina e retorna o endereço da memoria do disciplina.
 
-void lst_insere_alunos_na_disciplina(TAlunos *l, int ra[50], int quant_aluno, TDisciplinas *f, int cod_disc[50], int quant_disc); // insere alunos pelo ra nas disciplinas.
+void lst_insere_alunos_na_disciplina(TAlunos *l, int ra[50], int quant_aluno, TDisciplinas *f, int cod_disc[50], int quant_disc);                // insere alunos pelo ra nas disciplinas.
 void lst_insere_professores_na_disciplina(TProfessores *l, int cod[50], int quant_professor, TDisciplinas *f, int cod_disc[50], int quant_disc); // insere professores pelo cod na disciplinas.
 
-void lst_imprime_alunos_na_disciplina(TDisciplinas *l, int cod_dis); // imprime alunos de uma disciplina
+void lst_imprime_alunos_na_disciplina(TDisciplinas *l, int cod_dis);      // imprime alunos de uma disciplina
 void lst_imprime_professores_na_disciplina(TDisciplinas *l, int cod_dis); // imprime professores de uma disciplina
 
-void lst_remover_alunos_disciplinas(TDisciplinas *l, int ra[50], int quantidade); // remove alunos de uma disciplina
+void lst_remover_alunos_disciplinas(TDisciplinas *l, int ra[50], int quantidade);       // remove alunos de uma disciplina
 void lst_remover_professores_disciplinas(TDisciplinas *l, int cod[50], int quantidade); // remove professores de uma disciplina
 
 int menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas);
@@ -83,7 +83,7 @@ void vincularProfessor(TProfessores *professores, TDisciplinas *disciplinas);
 void desvincularAluno(TAlunos *alunos, TDisciplinas *disciplinas);
 void desvincularProfessor(TProfessores *professores, TDisciplinas *disciplinas);
 
-int main()
+int main(int argc, const char *argv[])
 {
     // char nome[50];
     // int ra_a[50];
@@ -125,10 +125,12 @@ int main()
     return 0;
 }
 
-int menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas){
+int menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas)
+{
     int escolha, opcao;
 
-    do{
+    do
+    {
         printf(" Escolha o que deseja fazer: \n");
         printf("1 - Cadastro\n");
         printf("2 - Cancelamento\n");
@@ -140,7 +142,8 @@ int menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas){
 
         system("cls");
 
-        switch (escolha){
+        switch (escolha)
+        {
 
         case 1:
             printf("1 - Aluno\n");
@@ -150,23 +153,24 @@ int menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas){
 
             scanf("%d\n", &opcao);
 
-            switch (opcao){
-                case 1:
-                    cadastrarAluno(alunos);
+            switch (opcao)
+            {
+            case 1:
+                cadastrarAluno(alunos);
                 break;
 
-                case 2:
-                    cadastrarProfessor(professores);
+            case 2:
+                cadastrarProfessor(professores);
                 break;
 
-                case 3:
-                    cadastrarMateria(disciplinas);
+            case 3:
+                cadastrarMateria(disciplinas);
                 break;
 
-                case 4:
+            case 4:
                 break;
             }
-        break;
+            break;
 
         case 2:
             printf("1 - Aluno\n");
@@ -176,24 +180,25 @@ int menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas){
 
             scanf("%d\n", &opcao);
 
-            switch (opcao){
+            switch (opcao)
+            {
 
             case 1:
                 cancelarAluno(alunos);
-            break;
+                break;
 
             case 2:
                 cancelarProfessor(professores);
-            break;
+                break;
 
             case 3:
                 cancelarMateria(disciplinas);
-            break;
+                break;
 
             case 4:
-            break;
+                break;
             }
-        break;
+            break;
 
         case 3:
             printf("1 - Aluno\n");
@@ -202,20 +207,21 @@ int menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas){
 
             scanf("%d\n", &opcao);
 
-            switch (opcao){
+            switch (opcao)
+            {
 
             case 1:
                 vincularAluno(alunos, disciplinas);
-            break;
+                break;
 
             case 2:
                 vincularProfessor(professores, disciplinas);
-            break;
+                break;
 
             case 3:
-            break;
+                break;
             }
-        break;
+            break;
 
         case 4:
             printf("1 - Aluno\n");
@@ -224,20 +230,21 @@ int menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas){
 
             scanf("%d\n", &opcao);
 
-            switch (opcao){
+            switch (opcao)
+            {
 
             case 1:
                 desvincularAluno(alunos, disciplinas);
-            break;
+                break;
 
             case 2:
                 desvincularProfessor(professores, disciplinas);
-            break;
+                break;
 
             case 3:
-            break;
+                break;
             }
-        break;
+            break;
 
         case 5:
             printf("Finalizando");
@@ -247,7 +254,8 @@ int menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas){
 }
 
 /* funcao imprime */
-void lst_imprime_alunos(TAlunos *l){
+void lst_imprime_alunos(TAlunos *l)
+{
     TAlunos *p;
     if (l == NULL)
     {
@@ -261,7 +269,8 @@ void lst_imprime_alunos(TAlunos *l){
     }
 }
 
-void lst_imprime_professores(TProfessores *l){
+void lst_imprime_professores(TProfessores *l)
+{
     TProfessores *p;
     for (p = l; p != NULL; p = p->prox)
     {
@@ -270,7 +279,8 @@ void lst_imprime_professores(TProfessores *l){
     }
 }
 
-void lst_imprime_disciplinas(TDisciplinas *l){
+void lst_imprime_disciplinas(TDisciplinas *l)
+{
     TDisciplinas *p;
     for (p = l; p != NULL; p = p->prox)
     {
@@ -279,7 +289,8 @@ void lst_imprime_disciplinas(TDisciplinas *l){
     }
 }
 
-void lst_imprime_alunos_na_disciplina(TDisciplinas *l, int cod_dis){
+void lst_imprime_alunos_na_disciplina(TDisciplinas *l, int cod_dis)
+{
     TDisciplinas *p;
     TAlunos *f;
     for (p = l; p != NULL && p->cod != cod_dis; p = p->prox)
@@ -300,7 +311,8 @@ void lst_imprime_alunos_na_disciplina(TDisciplinas *l, int cod_dis){
     }
 }
 
-void lst_imprime_professores_na_disciplina(TDisciplinas *l, int cod_dis){
+void lst_imprime_professores_na_disciplina(TDisciplinas *l, int cod_dis)
+{
     TDisciplinas *p;
     TProfessores *f;
     for (p = l; p != NULL && p->cod != cod_dis; p = p->prox)
@@ -322,20 +334,24 @@ void lst_imprime_professores_na_disciplina(TDisciplinas *l, int cod_dis){
 }
 
 /* funcao de criacao: RETORNA uma lista vazia */
-TAlunos *lst_cria_alunos(){
+TAlunos *lst_cria_alunos()
+{
     return NULL;
 }
 
-TProfessores *lst_cria_professores(){
+TProfessores *lst_cria_professores()
+{
     return NULL;
 }
 
-TDisciplinas *lst_cria_disciplinas(){
+TDisciplinas *lst_cria_disciplinas()
+{
     return NULL;
 }
 
 /* insercao no inicio: RETORNA a lista atualizada */
-TAlunos *lst_insere_alunos(TAlunos *l, char nome[50]){
+TAlunos *lst_insere_alunos(TAlunos *l, char nome[50])
+{
     TAlunos *novo = (TAlunos *)malloc(sizeof(TAlunos));
 
     strcpy(novo->nome, nome);
@@ -346,7 +362,8 @@ TAlunos *lst_insere_alunos(TAlunos *l, char nome[50]){
     return novo;
 }
 
-TAlunos *lst_insere_alunos_na_disciplina_aux(TAlunos *l, char nome[50], int ra){
+TAlunos *lst_insere_alunos_na_disciplina_aux(TAlunos *l, char nome[50], int ra)
+{
     TAlunos *novo = (TAlunos *)malloc(sizeof(TAlunos));
 
     strcpy(novo->nome, nome);
@@ -356,7 +373,8 @@ TAlunos *lst_insere_alunos_na_disciplina_aux(TAlunos *l, char nome[50], int ra){
     return novo;
 }
 
-TProfessores *lst_insere_professores(TProfessores *l, char nome[50]){
+TProfessores *lst_insere_professores(TProfessores *l, char nome[50])
+{
     TProfessores *novo = (TProfessores *)malloc(sizeof(TProfessores));
 
     strcpy(novo->nome, nome);
@@ -367,7 +385,8 @@ TProfessores *lst_insere_professores(TProfessores *l, char nome[50]){
     return novo;
 }
 
-TProfessores *lst_insere_professores_na_disciplina_aux(TProfessores *l, char nome[50], int cod){
+TProfessores *lst_insere_professores_na_disciplina_aux(TProfessores *l, char nome[50], int cod)
+{
     TProfessores *novo = (TProfessores *)malloc(sizeof(TProfessores));
 
     strcpy(novo->nome, nome);
@@ -377,7 +396,8 @@ TProfessores *lst_insere_professores_na_disciplina_aux(TProfessores *l, char nom
     return novo;
 }
 
-TDisciplinas *lst_insere_disciplinas(TDisciplinas *l, char nome[50]){
+TDisciplinas *lst_insere_disciplinas(TDisciplinas *l, char nome[50])
+{
     TDisciplinas *novo = (TDisciplinas *)malloc(sizeof(TDisciplinas));
     TAlunos *alunos;
     TProfessores *professor;
@@ -395,7 +415,8 @@ TDisciplinas *lst_insere_disciplinas(TDisciplinas *l, char nome[50]){
 }
 
 /* remoção: remove no da lista com a info informada */
-void lst_remover_alunos(TAlunos *l, int info){
+void lst_remover_alunos(TAlunos *l, int info)
+{
     TAlunos *a;
     TAlunos *p = l;
 
@@ -421,7 +442,8 @@ void lst_remover_alunos(TAlunos *l, int info){
     }
 }
 
-void lst_remover_professores(TProfessores *l, int info){
+void lst_remover_professores(TProfessores *l, int info)
+{
     TProfessores *a;
     TProfessores *p = l;
 
@@ -447,7 +469,8 @@ void lst_remover_professores(TProfessores *l, int info){
     }
 }
 
-void lst_remover_disciplinas(TDisciplinas *l, int info){
+void lst_remover_disciplinas(TDisciplinas *l, int info)
+{
     TDisciplinas *a;
     TDisciplinas *p = l;
 
@@ -475,7 +498,8 @@ void lst_remover_disciplinas(TDisciplinas *l, int info){
 
 /* adição na disciplinas: adiciona alunos e professores dentro da disciplinas informadas*/
 
-void lst_insere_alunos_na_disciplina(TAlunos *l, int ra[50], int quant_aluno, TDisciplinas *f, int cod_disc[50], int quant_disc){
+void lst_insere_alunos_na_disciplina(TAlunos *l, int ra[50], int quant_aluno, TDisciplinas *f, int cod_disc[50], int quant_disc)
+{
     TAlunos *aluno = lst_cria_alunos();
     TDisciplinas *disciplina = lst_cria_disciplinas();
     char nome_aluno[50];
@@ -483,27 +507,35 @@ void lst_insere_alunos_na_disciplina(TAlunos *l, int ra[50], int quant_aluno, TD
 
     int i, j;
 
-    for(i = 0; i < quant_aluno; i++){
+    for (i = 0; i < quant_aluno; i++)
+    {
         aluno = lst_procura_alunos(l, ra[i]);
-        if(aluno != NULL){
-            for(j = 0; j < quant_disc; j++){
+        if (aluno != NULL)
+        {
+            for (j = 0; j < quant_disc; j++)
+            {
                 disciplina = lst_procura_disciplinas(f, cod_disc[j]);
-                if(disciplina != NULL){
-                    strcpy(nome_aluno,aluno->nome);
+                if (disciplina != NULL)
+                {
+                    strcpy(nome_aluno, aluno->nome);
                     ra_aluno = aluno->ra;
                     disciplina->alunos = lst_insere_alunos_na_disciplina_aux(disciplina->alunos, nome_aluno, ra_aluno);
                 }
-                else{
+                else
+                {
                     printf("Disciplina com cod %d não encontrado", cod_disc[i]);
                 }
             }
-        }else{
+        }
+        else
+        {
             printf("Aluno com RA %d não encontrado.", ra[i]);
         }
     }
 }
 
-void lst_insere_professores_na_disciplina(TProfessores *l, int cod[50], int quant_professor, TDisciplinas *f, int cod_disc[50], int quant_disc){
+void lst_insere_professores_na_disciplina(TProfessores *l, int cod[50], int quant_professor, TDisciplinas *f, int cod_disc[50], int quant_disc)
+{
     TProfessores *professor = lst_cria_professores();
     TDisciplinas *disciplina = lst_cria_disciplinas();
     char nome_professor[50];
@@ -511,21 +543,28 @@ void lst_insere_professores_na_disciplina(TProfessores *l, int cod[50], int quan
 
     int i, j;
 
-    for(i = 0; i < quant_professor; i++){
+    for (i = 0; i < quant_professor; i++)
+    {
         professor = lst_procura_professores(l, cod[i]);
-        if(professor != NULL){
-            for(j = 0; j < quant_disc; j++){
+        if (professor != NULL)
+        {
+            for (j = 0; j < quant_disc; j++)
+            {
                 disciplina = lst_procura_disciplinas(f, cod_disc[j]);
-                if(disciplina != NULL){
-                    strcpy(nome_professor,professor->nome);
+                if (disciplina != NULL)
+                {
+                    strcpy(nome_professor, professor->nome);
                     ra_professor = professor->cod;
                     disciplina->professor = lst_insere_professores_na_disciplina_aux(disciplina->professor, nome_professor, ra_professor);
                 }
-                else{
+                else
+                {
                     printf("Disciplina com cod %d não encontrado", cod_disc[i]);
                 }
             }
-        }else{
+        }
+        else
+        {
             printf("Professor com RA %d não encontrado.", cod[i]);
         }
     }
@@ -533,7 +572,8 @@ void lst_insere_professores_na_disciplina(TProfessores *l, int cod[50], int quan
 
 /* remoção na disciplina: remove no da lista dentro da disciplona com as infos informada */
 
-void lst_remover_alunos_disciplinas(TDisciplinas *l, int ra[50], int quantidade){
+void lst_remover_alunos_disciplinas(TDisciplinas *l, int ra[50], int quantidade)
+{
     TAlunos *p = l->alunos;
     int i;
 
@@ -545,7 +585,8 @@ void lst_remover_alunos_disciplinas(TDisciplinas *l, int ra[50], int quantidade)
     printf("Alunos removidos com sucesso !");
 }
 
-void lst_remover_professores_disciplinas(TDisciplinas *l, int cod[50], int quantidade){
+void lst_remover_professores_disciplinas(TDisciplinas *l, int cod[50], int quantidade)
+{
     TProfessores *p = l->professor;
     int i;
 
@@ -559,7 +600,8 @@ void lst_remover_professores_disciplinas(TDisciplinas *l, int cod[50], int quant
 
 /* procurar na lista: procura na lista com a informação informada */
 
-TAlunos* lst_procura_alunos(TAlunos *l, int ra){
+TAlunos *lst_procura_alunos(TAlunos *l, int ra)
+{
     TAlunos *p;
     if (l == NULL)
     {
@@ -568,7 +610,8 @@ TAlunos* lst_procura_alunos(TAlunos *l, int ra){
     }
     for (p = l; p != NULL; p = p->prox)
     {
-        if(p->ra == ra){
+        if (p->ra == ra)
+        {
             return p;
         }
     }
@@ -576,7 +619,8 @@ TAlunos* lst_procura_alunos(TAlunos *l, int ra){
     return NULL;
 }
 
-TProfessores* lst_procura_professores(TProfessores *l, int cod){
+TProfessores *lst_procura_professores(TProfessores *l, int cod)
+{
     TProfessores *p;
     if (l == NULL)
     {
@@ -585,7 +629,8 @@ TProfessores* lst_procura_professores(TProfessores *l, int cod){
     }
     for (p = l; p != NULL; p = p->prox)
     {
-        if(p->cod == cod){
+        if (p->cod == cod)
+        {
             return p;
         }
     }
@@ -593,16 +638,19 @@ TProfessores* lst_procura_professores(TProfessores *l, int cod){
     return NULL;
 }
 
-TDisciplinas* lst_procura_disciplinas(TDisciplinas *l, int cod){
+TDisciplinas *lst_procura_disciplinas(TDisciplinas *l, int cod)
+{
     TDisciplinas *p;
     if (l == NULL)
     {
         printf("Nenhuma disciplina encontrada.");
-        return NULL;;
+        return NULL;
+        ;
     }
     for (p = l; p != NULL; p = p->prox)
     {
-        if(p->cod == cod){
+        if (p->cod == cod)
+        {
             return p;
         }
     }
@@ -610,44 +658,50 @@ TDisciplinas* lst_procura_disciplinas(TDisciplinas *l, int cod){
     return NULL;
 }
 
-void cadastrarAluno(TAlunos *alunos){
+void cadastrarAluno(TAlunos *alunos)
+{
     char nome[50];
-    scanf("%s",nome);
+    scanf("%s", nome);
     alunos = lst_insere_alunos(alunos, nome);
 }
-void cadastrarProfessor(TProfessores *professores){
+void cadastrarProfessor(TProfessores *professores)
+{
     char nome[50];
-    scanf("%s",nome);
+    scanf("%s", nome);
     professores = lst_insere_professores(professores, nome);
 }
-void cadastrarMateria(TDisciplinas *disciplinas){
+void cadastrarMateria(TDisciplinas *disciplinas)
+{
     char nome[50];
-    scanf("%s",nome);
+    scanf("%s", nome);
     disciplinas = lst_insere_disciplinas(disciplinas, nome);
 }
 
-void cancelarAluno(TAlunos *alunos){
+void cancelarAluno(TAlunos *alunos)
+{
     int ra;
     printf("Digite o numero de RA\n");
     scanf("%d\n", &ra);
     lst_remover_alunos(alunos, ra);
 }
 
-void cancelarProfessor(TProfessores *professores){
+void cancelarProfessor(TProfessores *professores)
+{
     int cod;
     printf("Digite o numero de COD\n");
     scanf("%d\n", &cod);
     lst_remover_professores(professores, cod);
 }
-void cancelarMateria(TDisciplinas *disciplinas){
+void cancelarMateria(TDisciplinas *disciplinas)
+{
     int cod;
     printf("Digite o numero de COD\n");
     scanf("%d\n", &cod);
     lst_remover_disciplinas(disciplinas, cod);
 }
 
-void vincularAluno(TAlunos *alunos, TDisciplinas *disciplinas){}
-void vincularProfessor(TProfessores *professores, TDisciplinas *disciplinas){}
+void vincularAluno(TAlunos *alunos, TDisciplinas *disciplinas) {}
+void vincularProfessor(TProfessores *professores, TDisciplinas *disciplinas) {}
 
-void desvincularAluno(TAlunos *alunos, TDisciplinas *disciplinas){}
-void desvincularProfessor(TProfessores *professores, TDisciplinas *disciplinas){}
+void desvincularAluno(TAlunos *alunos, TDisciplinas *disciplinas) {}
+void desvincularProfessor(TProfessores *professores, TDisciplinas *disciplinas) {}
