@@ -67,7 +67,7 @@ void lst_imprime_professores_na_disciplina(TDisciplinas *l, int cod_dis); // imp
 void lst_remover_alunos_disciplinas(TDisciplinas *l, int ra[50], int quantidade); // remove alunos de uma disciplina
 void lst_remover_professores_disciplinas(TDisciplinas *l, int cod[50], int quantidade); // remove professores de uma disciplina
 
-void menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas);
+int menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas);
 
 void cadastrarAluno(TAlunos *alunos);
 void cadastrarProfessor(TProfessores *professores);
@@ -125,8 +125,9 @@ int main()
     return 0;
 }
 
-void menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas){
+int menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas){
     int escolha, opcao;
+
     do{
         printf(" Escolha o que deseja fazer: \n");
         printf("1 - Cadastro\n");
