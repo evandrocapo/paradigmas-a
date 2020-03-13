@@ -64,8 +64,8 @@ void lst_insere_professores_na_disciplina(TProfessores *l, int cod[50], int quan
 void lst_imprime_alunos_na_disciplina(TDisciplinas *l, int cod_dis);      // imprime alunos de uma disciplina
 void lst_imprime_professores_na_disciplina(TDisciplinas *l, int cod_dis); // imprime professores de uma disciplina
 
-void lst_remover_alunos_disciplinas(TDisciplinas *l, int ra[50], int quantidade);       // remove alunos de uma disciplina
-void lst_remover_professores_disciplinas(TDisciplinas *l, int cod[50], int quantidade); // remove professores de uma disciplina
+void lst_remover_alunos_disciplinas(TDisciplinas *l, int ra, int quantidade);       // remove alunos pelo ra nas disciplinas
+void lst_remover_professores_disciplinas(TDisciplinas *l, int cod, int quantidade); // remove professores pelo cod nas disciplinas
 
 int menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas);
 
@@ -127,7 +127,8 @@ int main(int argc, const char *argv[])
 
 int menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas)
 {
-    int escolha, opcao;
+    int escolha, opcao, opcao2;
+    int lst_op;
 
     do
     {
@@ -161,7 +162,30 @@ int menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas)
                 lst_imprime_professores(professores);
             }
             else if(opcao == 3){
-                lst_imprime_disciplinas(disciplinas);
+                printf("1 - Disciplina\n");
+                printf("2 - Alunos na disciplina\n");
+                printf("3 - Professores na disciplina\n");
+                printf("4 - Voltar\n");
+                
+                fflush(stdin);
+                scanf("%d", &opcao2);
+                
+                if(opcao2 == 1) lst_imprime_disciplinas(disciplinas);
+                else if (opcao2 == 2){
+                    printf("Digite o codigo da disciplina\n");
+                    fflush(stdin);
+                    scanf("%d", &lst_op);
+                    
+                    lst_imprime_alunos_na_disciplina(disciplinas, lst_op);
+                }
+                else if(opcao2 == 3){
+                    printf("Digite o codigo da disciplina\n");
+                    fflush(stdin);
+                    scanf("%d", &lst_op);
+                    
+                    lst_imprime_professores_na_disciplina(disciplinas, lst_op);
+                }
+                else{}
             }
             else{}
         }
@@ -196,13 +220,28 @@ int menu(TAlunos *alunos, TProfessores *professores, TDisciplinas *disciplinas)
             
             if(opcao == 1){
                 alunos = cancelarAluno(alunos);
-                printf("Cancelado com sucesso");
             }
             else if(opcao == 2){
                 professores = cancelarProfessor(professores);
             }
             else if(opcao == 3){
                 disciplinas = cancelarMateria(disciplinas);
+            }
+            else{}
+        }
+        else if(escolha == 3){
+            printf("1 - Aluno\n");
+            printf("2 - Professor\n");
+            printf("3 - Voltar\n");
+            
+            fflush(stdin);
+            scanf("%d", &opcao);
+            
+            if(opcao == 1){
+                vincularAluno(alunos, disciplinas);
+            }
+            else if(opcao == 2){
+                vincularProfessor(professores, disciplinas);
             }
             else{}
         }
@@ -662,28 +701,20 @@ void lst_insere_professores_na_disciplina(TProfessores *l, int cod[50], int quan
 
 /* remoção na disciplina: remove no da lista dentro da disciplona com as infos informada */
 
-void lst_remover_alunos_disciplinas(TDisciplinas *l, int ra[50], int quantidade)
+void lst_remover_alunos_disciplinas(TDisciplinas *l, int ra, int quantidade)
 {
     TAlunos *p = l->alunos;
-    int i;
-
-    for (i = 0; i < quantidade; i++)
-    {
-        lst_remover_alunos(p, ra[i]);
-    }
+    
+    lst_remover_alunos(p, ra);
 
     printf("Alunos removidos com sucesso !");
 }
 
-void lst_remover_professores_disciplinas(TDisciplinas *l, int cod[50], int quantidade)
+void lst_remover_professores_disciplinas(TDisciplinas *l, int cod, int quantidade)
 {
     TProfessores *p = l->professor;
-    int i;
 
-    for (i = 0; i < quantidade; i++)
-    {
-        lst_remover_professores(p, cod[i]);
-    }
+    lst_remover_professores(p, cod);
 
     printf("Professores removidos com sucesso !");
 }
@@ -802,8 +833,151 @@ TDisciplinas* cancelarMateria(TDisciplinas *disciplinas)
     return disciplinas;
 }
 
-void vincularAluno(TAlunos *alunos, TDisciplinas *disciplinas) {}
-void vincularProfessor(TProfessores *professores, TDisciplinas *disciplinas) {}
+void vincularAluno(TAlunos *alunos, TDisciplinas *disciplinas) {
+    int ra[50],cod[50], quant_a, quant_d, i;
+    
+    printf("Digite a quantidade de alunos\n");
+    fflush(stdin);
+    scanf("%d", &quant_a);
+    
+    for(i=0; i<quant_a;i++){
+        printf("Digite o ra do aluno %d\n", i);
+        fflush(stdin);
+        scanf("%d", &ra[i]);
+    }
+    
+    printf("Digite a quantidade de disciplinas");
+    fflush(stdin);
+    scanf("%d", &quant_d);
+    
+    for(i=0; i<quant_d;i++){
+        printf("Digite o cod da disciplina %d\n", i);
+        fflush(stdin);
+        scanf("%d", &cod[i]);
+    }
+    
+    lst_insere_alunos_na_disciplina(alunos, ra, quant_a, disciplinas, cod, quant_d);
+}
+void vincularProfessor(TProfessores *professores, TDisciplinas *disciplinas) {
+    int cod_p[50],cod[50], quant_p, quant_d, i;
+    
+    printf("Digite a quantidade de professores\n");
+    fflush(stdin);
+    scanf("%d", &quant_p);
+    
+    for(i=0; i<quant_p;i++){
+        printf("Digite o ra do professor %d\n", i);
+        fflush(stdin);
+        scanf("%d", &cod_p[i]);
+    }
+    
+    printf("Digite a quantidade de disciplinas");
+    fflush(stdin);
+    scanf("%d", &quant_d);
+    
+    for(i=0; i<quant_d;i++){
+        printf("Digite o cod da disciplina %d\n", i);
+        fflush(stdin);
+        scanf("%d", &cod[i]);
+    }
+    
+    lst_insere_professores_na_disciplina(professores, cod_p, quant_p, disciplinas, cod, quant_d);
+}
 
-void desvincularAluno(TAlunos *alunos, TDisciplinas *disciplinas) {}
-void desvincularProfessor(TProfessores *professores, TDisciplinas *disciplinas) {}
+void desvincularAluno(TAlunos *alunos, TDisciplinas *disciplinas) {
+    int ra[50],cod[50], quant_a, quant_d, i,j;
+    TAlunos* pr_aluno = lst_cria_alunos();
+    TDisciplinas* pr_disc = lst_cria_disciplinas();
+    
+    printf("Digite a quantidade de alunos\n");
+    fflush(stdin);
+    scanf("%d", &quant_a);
+    
+    for(i=0; i<quant_a;i++){
+        printf("Digite o ra do aluno %d\n", i);
+        fflush(stdin);
+        scanf("%d", &ra[i]);
+    }
+    
+    printf("Digite a quantidade de disciplinas");
+    fflush(stdin);
+    scanf("%d", &quant_d);
+    
+    for(i=0; i<quant_d;i++){
+        printf("Digite o cod da disciplina %d\n", i);
+        fflush(stdin);
+        scanf("%d", &cod[i]);
+    }
+    
+    for(i=0;i < quant_a; i++){
+        pr_aluno = lst_procura_alunos(alunos, ra[i]);
+        if (pr_aluno != NULL)
+        {
+            for (j = 0; j < quant_d; j++)
+            {
+                pr_disc = lst_procura_disciplinas(disciplinas, cod[j]);
+                if (pr_disc != NULL)
+                {
+                    lst_remover_alunos_disciplinas(pr_disc, pr_aluno->ra, 1);
+                }
+                else
+                {
+                    printf("Disciplina com cod %d não encontrado", cod[j]);
+                }
+            }
+        }
+        else
+        {
+            printf("Aluno com RA %d não encontrado.", ra[i]);
+        }
+    }
+
+}
+void desvincularProfessor(TProfessores *professores, TDisciplinas *disciplinas) {
+    int cod_p[50],cod[50], quant_p, quant_d, i,j;
+    TProfessores* pr_prof = lst_cria_professores();
+    TDisciplinas* pr_disc = lst_cria_disciplinas();
+    
+    printf("Digite a quantidade de professores\n");
+    fflush(stdin);
+    scanf("%d", &quant_p);
+    
+    for(i=0; i<quant_p;i++){
+        printf("Digite o ra do professor %d\n", i);
+        fflush(stdin);
+        scanf("%d", &cod_p[i]);
+    }
+    
+    printf("Digite a quantidade de disciplinas");
+    fflush(stdin);
+    scanf("%d", &quant_d);
+    
+    for(i=0; i<quant_d;i++){
+        printf("Digite o cod da disciplina %d\n", i);
+        fflush(stdin);
+        scanf("%d", &cod[i]);
+    }
+    
+    for(i=0;i < quant_p; i++){
+        pr_prof = lst_procura_professores(professores, cod_p[i]);
+        if (pr_prof != NULL)
+        {
+            for (j = 0; j < quant_d; j++)
+            {
+                pr_disc = lst_procura_disciplinas(disciplinas, cod[j]);
+                if (pr_disc != NULL)
+                {
+                    lst_remover_professores_disciplinas(pr_disc, pr_prof->cod, 1);
+                }
+                else
+                {
+                    printf("Disciplina com cod %d não encontrado", cod[j]);
+                }
+            }
+        }
+        else
+        {
+            printf("Aluno com RA %d não encontrado.", cod_p[i]);
+        }
+    }
+}
