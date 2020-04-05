@@ -64,8 +64,8 @@ void lst_insere_professores_na_disciplina(TProfessores* l, int cod[50], int quan
 void lst_imprime_alunos_na_disciplina(TDisciplinas* l, int cod_dis);      // imprime alunos de uma disciplina
 void lst_imprime_professores_na_disciplina(TDisciplinas* l, int cod_dis); // imprime professores de uma disciplina
 
-void lst_remover_alunos_disciplinas(TDisciplinas* l, int ra, int quantidade);       // remove alunos pelo ra nas disciplinas
-void lst_remover_professores_disciplinas(TDisciplinas* l, int cod, int quantidade); // remove professores pelo cod nas disciplinas
+TAlunos* lst_remover_alunos_disciplinas(TDisciplinas* l, int ra, int quantidade);       // remove alunos pelo ra nas disciplinas
+TProfessores* lst_remover_professores_disciplinas(TDisciplinas* l, int cod, int quantidade); // remove professores pelo cod nas disciplinas
 
 int menu(TAlunos* alunos, TProfessores* professores, TDisciplinas* disciplinas);
 
@@ -612,22 +612,26 @@ void lst_insere_professores_na_disciplina(TProfessores* l, int cod[50], int quan
 
 /* remoção na disciplina: remove no da lista dentro da disciplona com as infos informada */
 
-void lst_remover_alunos_disciplinas(TDisciplinas* l, int ra, int quantidade)
+TAlunos* lst_remover_alunos_disciplinas(TDisciplinas* l, int ra, int quantidade)
 {
     TAlunos* p = l->alunos;
 
-    lst_remover_alunos(p, ra);
+    p = lst_remover_alunos(p, ra);
 
     printf("Alunos removidos com sucesso !");
+
+    return p;
 }
 
-void lst_remover_professores_disciplinas(TDisciplinas* l, int cod, int quantidade)
+TProfessores* lst_remover_professores_disciplinas(TDisciplinas* l, int cod, int quantidade)
 {
     TProfessores* p = l->professor;
 
-    lst_remover_professores(p, cod);
+    p = lst_remover_professores(p, cod);
 
     printf("Professores removidos com sucesso !");
+
+    return p;
 }
 
 /* procurar na lista: procura na lista com a informação informada */
@@ -829,7 +833,7 @@ void desvincularAluno(TAlunos* alunos, TDisciplinas* disciplinas) {
                 pr_disc = lst_procura_disciplinas(disciplinas, cod[j]);
                 if (pr_disc != NULL)
                 {
-                    lst_remover_alunos_disciplinas(pr_disc, pr_aluno->ra, 1);
+                    pr_disc->alunos = lst_remover_alunos_disciplinas(pr_disc, pr_aluno->ra, 1);
                 }
                 else
                 {
@@ -878,7 +882,7 @@ void desvincularProfessor(TProfessores* professores, TDisciplinas* disciplinas) 
                 pr_disc = lst_procura_disciplinas(disciplinas, cod[j]);
                 if (pr_disc != NULL)
                 {
-                    lst_remover_professores_disciplinas(pr_disc, pr_prof->cod, 1);
+                    pr_disc->professor = lst_remover_professores_disciplinas(pr_disc, pr_prof->cod, 1);
                 }
                 else
                 {
